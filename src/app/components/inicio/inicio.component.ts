@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PessoaService} from "../../services/pessoa.service";
 import {Pessoa} from "../../model/pessoa";
+import {Page} from "../../model/page";
 
 @Component({
   selector: 'app-inicio',
@@ -18,8 +19,10 @@ export class InicioComponent implements OnInit {
   }
 
   getAll() {
-    this.pessoaService.getAll().subscribe((resp: Pessoa[]) => {
+    this.pessoaService.getAll().subscribe((resp: Page) => {
       this.pessoas = resp.content;
+      console.log(this.pessoas)
+      console.log(resp)
     })
   }
 }
