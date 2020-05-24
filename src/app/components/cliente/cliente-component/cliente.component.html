@@ -1,6 +1,6 @@
 <div class="container">
 
-  <form [formGroup]="pessoaForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="col-6">
         <mat-form-field class="example-full-width">
@@ -91,8 +91,9 @@
 
     <button class="btn btn-primary" type="submit"> Salvar</button>
 
-    <app-form-debug [form]="pessoaForm"></app-form-debug>
+    <app-form-debug [form]="clienteForm"></app-form-debug>
   </form>
 </div>
+
 
 

@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {PessoaComponent} from "./pessoa-component/pessoa.component";
+import {ClienteComponent} from "./cliente-component/cliente.component";
 import {MatCardModule} from "@angular/material/card";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
@@ -11,7 +11,7 @@ import {FormDebugComponent} from "../../debug/form-debug/form-debug.component";
 
 @NgModule({
   declarations: [
-    PessoaComponent,
+    ClienteComponent,
     FormDebugComponent
   ],
   imports: [
@@ -24,5 +24,5 @@ import {FormDebugComponent} from "../../debug/form-debug/form-debug.component";
     ReactiveFormsModule
   ]
 })
-export class PessoaModule {
+export class ClienteModule {
 }

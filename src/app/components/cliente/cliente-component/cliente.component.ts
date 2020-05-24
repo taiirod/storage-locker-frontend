@@ -1,24 +1,24 @@
 import {Component, OnInit} from '@angular/core';
-import {Pessoa} from "../../../model/pessoa";
-import {PessoaService} from "../../../services/pessoa.service";
+import {Cliente} from "../../../model/cliente";
+import {ClienteService} from "../../../services/cliente.service";
 import {Page} from "../../../model/page";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpResponse} from "@angular/common/http";
 
 @Component({
-  selector: 'app-pessoa',
-  templateUrl: './pessoa.component.html',
-  styleUrls: ['./pessoa.component.css']
+  selector: 'app-cliente',
+  templateUrl: './cliente.component.html',
+  styleUrls: ['./cliente.component.css']
 })
-export class PessoaComponent implements OnInit {
+export class ClienteComponent implements OnInit {
 
-  pessoas: Pessoa[];
-  pessoaForm: FormGroup;
+  clientes: Cliente[];
+  clienteForm: FormGroup;
 
-  constructor(private pessoaService: PessoaService,
+  constructor(private clienteService: ClienteService,
               private formBuilder: FormBuilder) {
 
-    this.pessoaForm = this.formBuilder.group({
+    this.clienteForm = this.formBuilder.group({
       nomeCompleto: [null, Validators.required],
       cpf: [null, Validators.required],
       email: [null, Validators.required],
@@ -45,21 +45,22 @@ export class PessoaComponent implements OnInit {
   }
 
   getAll() {
-    this.pessoaService.getAll().subscribe((resp: Page) => {
-      this.pessoas = resp.content;
+    this.clienteService.getAll().subscribe((resp: Page) => {
+      this.clientes = resp.content;
+      console.log(this.clientes)
     })
   }
 
   onSubmit() {
-    if (this.pessoaForm.valid) {
-      this.pessoaService.addPessoa(this.pessoaForm.value)
+    if (this.clienteForm.valid) {
+      this.clienteService.addCliente(this.clienteForm.value)
         .subscribe(resp => {
         if (resp){
-          alert('Pessoa salva com sucesso!')
-          this.pessoaForm.reset();
+          alert('Cliente salva com sucesso!')
+          this.clienteForm.reset();
         }
       }, error => {
-        alert('Erro ao salvar nova pessoa: ' + error.error.message)
+        alert('Erro ao salvar nova cliente: ' + error.error.message)
       })
     } else {
       alert('Formulário inválido.')
@@ -67,7 +68,7 @@ export class PessoaComponent implements OnInit {
   }
 
   getEndereco(event) {
-    this.pessoaService.getEndereco(event.target.value)
+    this.clienteService.getEndereco(event.target.value)
       .subscribe(resp => {
         this.preencherEndereco(resp);
       }, error => {
@@ -76,7 +77,7 @@ export class PessoaComponent implements OnInit {
   }
 
   preencherEndereco(endereco) {
-    this.pessoaForm.patchValue({
+    this.clienteForm.patchValue({
       endereco: [{
         rua: endereco.logradouro,
         bairro: endereco.bairro,

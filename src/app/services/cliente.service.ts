@@ -5,7 +5,7 @@ import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
-export class PessoaService {
+export class ClienteService {
 
   url = `${environment.urlApi}/pessoa`;
 
@@ -19,7 +19,7 @@ export class PessoaService {
       });
   }
 
-  addPessoa (pessoa) {
+  addCliente (pessoa) {
     return this.http.post(`${this.url}/nova`, pessoa)
       .pipe(resp => {
         console.log(resp)

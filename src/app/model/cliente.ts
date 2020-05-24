@@ -1,8 +1,7 @@
 import {Endereco} from "./endereco";
 
-export interface Pessoa {
+export interface Cliente {
 
-  // TODO criar model paginacao, que receba array de content
   id: number;
   nomeCompleto: string;
   cpf: string;
