@@ -6,7 +6,7 @@ import {ClienteComponent} from "./components/cliente/cliente-component/cliente.c
 
 const routes: Routes = [
   {path: 'inicio', component: InicioComponent},
-  {path: 'pessoa', component: ClienteComponent},
+  {path: 'cliente', component: ClienteComponent},
   {path: '', pathMatch: 'full', component: InicioComponent},
   {path: '**', component: InicioComponent},
 

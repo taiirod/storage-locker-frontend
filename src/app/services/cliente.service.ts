@@ -7,24 +7,23 @@ import {environment} from "../../environments/environment";
 })
 export class ClienteService {
 
-  url = `${environment.urlApi}/pessoa`;
+  url = `${environment.urlApi}/cliente`;
 
   constructor(private http: HttpClient) {
   }
 
   getAll() {
-    return this.http.get(`${this.url}/todas`)
+    return this.http.get(`${this.url}/todos`)
       .pipe(resp => {
         return resp;
       });
   }
 
-  addCliente (pessoa) {
-    return this.http.post(`${this.url}/nova`, pessoa)
+  addCliente(pessoa) {
+    return this.http.post(`${this.url}/novo`, pessoa)
       .pipe(resp => {
-        console.log(resp)
-      return resp;
-    })
+        return resp;
+      })
   }
 
   getEndereco(cep: string) {

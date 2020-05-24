@@ -3,7 +3,7 @@ import {Cliente} from "../../../model/cliente";
 import {ClienteService} from "../../../services/cliente.service";
 import {Page} from "../../../model/page";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {HttpResponse} from "@angular/common/http";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-cliente',
@@ -16,7 +16,8 @@ export class ClienteComponent implements OnInit {
   clienteForm: FormGroup;
 
   constructor(private clienteService: ClienteService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private toastr: ToastrService) {
 
     this.clienteForm = this.formBuilder.group({
       nomeCompleto: [null, Validators.required],
@@ -55,15 +56,15 @@ export class ClienteComponent implements OnInit {
     if (this.clienteForm.valid) {
       this.clienteService.addCliente(this.clienteForm.value)
         .subscribe(resp => {
-        if (resp){
-          alert('Cliente salva com sucesso!')
-          this.clienteForm.reset();
-        }
-      }, error => {
-        alert('Erro ao salvar nova cliente: ' + error.error.message)
-      })
+          if (resp) {
+            this.toastr.success('Cliente salvo com sucesso!', 'Sucesso');
+            this.clienteForm.reset();
+          }
+        }, error => {
+          this.toastr.error(error.error.message, 'Erro');
+        })
     } else {
-      alert('Formulário inválido.')
+      this.toastr.warning('Formulário inválido.', 'Atenção');
     }
   }
 

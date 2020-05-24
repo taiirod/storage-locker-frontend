@@ -10,10 +10,12 @@ import {HttpClientModule} from "@angular/common/http";
 import {ClienteModule} from "./components/cliente/cliente.module";
 import {LoginModule} from "./components/login/login.module";
 import {InicioModule} from "./components/inicio/inicio.module";
+import {CabecalhoComponent} from "./components/cabecalho/cabecalho.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CabecalhoComponent
   ],
   imports: [
     BrowserModule,
