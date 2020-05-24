@@ -1,0 +1,98 @@
+<div class="container">
+
+  <form [formGroup]="pessoaForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>Nome Completo</mat-label>
+          <input matInput formControlName="nomeCompleto">
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field class="example-full-width">
+          <mat-label>CPF</mat-label>
+          <input matInput formControlName="cpf">
+        </mat-form-field>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-5">
+        <mat-form-field class="example-full-width">
+          <mat-label>E-mail</mat-label>
+          <input matInput formControlName="email">
+        </mat-form-field>
+      </div>
+      <div class="col-5">
+        <mat-form-field class="example-full-width">
+          <mat-label>Telefone</mat-label>
+          <input matInput formControlName="telefone">
+        </mat-form-field>
+      </div>
+      <div class="col-2">
+        <mat-checkbox formControlName="ativo">
+          Ativo
+        </mat-checkbox>
+      </div>
+    </div>
+
+    <div formArrayName="endereco">
+      <div formGroupName="0">
+        <div class="row">
+          <div class="col-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>CEP</mat-label>
+              <input matInput formControlName="cep" (blur)="getEndereco($event)">
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>Rua</mat-label>
+              <input matInput formControlName="rua">
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>Número</mat-label>
+              <input matInput formControlName="numero">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field class="example-full-width">
+              <mat-label>Complemento</mat-label>
+              <input matInput formControlName="complemento">
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width">
+              <mat-label>Bairro</mat-label>
+              <input matInput formControlName="bairro">
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width">
+              <mat-label>Cidade</mat-label>
+              <input matInput formControlName="cidade">
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width">
+              <mat-label>Estado</mat-label>
+              <input matInput formControlName="estado">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <button class="btn btn-primary" type="submit"> Salvar</button>
+
+    <app-form-debug [form]="pessoaForm"></app-form-debug>
+  </form>
+</div>
+
+

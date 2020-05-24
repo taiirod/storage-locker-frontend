@@ -10,19 +10,8 @@ import {Page} from "../../model/page";
 })
 export class InicioComponent implements OnInit {
 
-  pessoas: Pessoa[];
-
-  constructor(private pessoaService: PessoaService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.getAll();
-  }
-
-  getAll() {
-    this.pessoaService.getAll().subscribe((resp: Page) => {
-      this.pessoas = resp.content;
-      console.log(this.pessoas)
-      console.log(resp)
-    })
   }
 }

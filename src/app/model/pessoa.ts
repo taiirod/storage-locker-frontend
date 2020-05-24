@@ -4,10 +4,9 @@ export interface Pessoa {
 
   // TODO criar model paginacao, que receba array de content
   id: number;
-  nome: string;
-  sobrenome: string;
+  nomeCompleto: string;
   cpf: string;
-  endereco: Endereco;
+  endereco: Endereco[];
   telefone: string;
   email: string;
   ativo: boolean;
