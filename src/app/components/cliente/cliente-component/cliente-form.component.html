@@ -11,7 +11,7 @@
       <div class="col-6">
         <mat-form-field class="example-full-width">
           <mat-label>CPF</mat-label>
-          <input matInput formControlName="cpf">
+          <input matInput formControlName="cpf" mask="000.000.000-00">
         </mat-form-field>
 
       </div>
@@ -43,7 +43,7 @@
           <div class="col-4">
             <mat-form-field class="example-full-width">
               <mat-label>CEP</mat-label>
-              <input matInput formControlName="cep" (blur)="getEndereco($event)">
+              <input matInput formControlName="cep" (blur)="getEndereco($event)" mask="00000-000">
             </mat-form-field>
           </div>
           <div class="col-4">

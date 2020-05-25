@@ -10,12 +10,19 @@ import {HttpClientModule} from "@angular/common/http";
 import {ClienteModule} from "./components/cliente/cliente.module";
 import {LoginModule} from "./components/login/login.module";
 import {InicioModule} from "./components/inicio/inicio.module";
-import {CabecalhoComponent} from "./components/cabecalho/cabecalho.component";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {CabecalhoComponent} from "./template/cabecalho/cabecalho.component";
+import {NavegacaoComponent} from "./template/navegacao/navegacao.component";
+import { StorageComponent } from './components/storage/storage/storage.component';
+import {StorageModule} from "./components/storage/storage.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    CabecalhoComponent
+    CabecalhoComponent,
+    NavegacaoComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,10 +30,14 @@ import {CabecalhoComponent} from "./components/cabecalho/cabecalho.component";
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
 
     ClienteModule,
     LoginModule,
-    InicioModule
+    InicioModule,
+    StorageModule
   ],
   providers: [ClienteService],
   bootstrap: [AppComponent]

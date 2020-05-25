@@ -2,22 +2,34 @@ import {Component, OnInit} from '@angular/core';
 import {Cliente} from "../../../model/cliente";
 import {ClienteService} from "../../../services/cliente.service";
 import {Page} from "../../../model/page";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
+import {CabecalhoService} from "../../../services/cabecalho.service";
+import {ActivatedRoute} from "@angular/router";
+import {Location} from "@angular/common";
+import contains from "@popperjs/core/lib/dom-utils/contains";
+import {writeErrorToLogFile} from "@angular/cli/utilities/log-file";
 
 @Component({
   selector: 'app-cliente',
-  templateUrl: './cliente.component.html',
-  styleUrls: ['./cliente.component.css']
+  templateUrl: './cliente-form.component.html',
+  styleUrls: ['./cliente-form.component.css']
 })
-export class ClienteComponent implements OnInit {
+export class ClienteFormComponent implements OnInit {
 
-  clientes: Cliente[];
   clienteForm: FormGroup;
 
   constructor(private clienteService: ClienteService,
               private formBuilder: FormBuilder,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private cabecalhoService: CabecalhoService,
+              private location: Location) {
+
+    cabecalhoService.dadosCabecalho = {
+      titulo: 'Adicionar Cliente',
+      icone: '',
+      rotaUrl: '/cliente/form',
+    }
 
     this.clienteForm = this.formBuilder.group({
       nomeCompleto: [null, Validators.required],
@@ -42,14 +54,6 @@ export class ClienteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAll();
-  }
-
-  getAll() {
-    this.clienteService.getAll().subscribe((resp: Page) => {
-      this.clientes = resp.content;
-      console.log(this.clientes)
-    })
   }
 
   onSubmit() {
@@ -58,13 +62,13 @@ export class ClienteComponent implements OnInit {
         .subscribe(resp => {
           if (resp) {
             this.toastr.success('Cliente salvo com sucesso!', 'Sucesso');
-            this.clienteForm.reset();
+            this.location.back();
           }
         }, error => {
           this.toastr.error(error.error.message, 'Erro');
         })
     } else {
-      this.toastr.warning('Formulário inválido.', 'Atenção');
+      this.alertaCamposInvalidos();
     }
   }
 
@@ -73,7 +77,7 @@ export class ClienteComponent implements OnInit {
       .subscribe(resp => {
         this.preencherEndereco(resp);
       }, error => {
-        alert('CEP não encontrado.')
+        this.toastr.error('CEP não encontrado.', 'Erro');
       })
   }
 
@@ -85,6 +89,24 @@ export class ClienteComponent implements OnInit {
         cidade: endereco.localidade,
         estado: endereco.uf,
       }]
+    })
+  }
+
+  alertaCamposInvalidos() {
+    Object.keys(this.clienteForm.controls).forEach(campo => {
+      const c = this.clienteForm.get(campo);
+      if (c.invalid && c !instanceof FormControl){
+        this.toastr.warning(`Campo ${campo} é inválido`, 'Atenção');
+      }
+      if (c instanceof FormArray){
+        c.controls.forEach((campo: FormGroup) => {
+          Object.keys(campo.controls).forEach(a => {
+            if (campo.get(a).invalid) {
+              this.toastr.warning(`Campo ${a} é inválido`, 'Atenção');
+            }
+          })
+        })
+      }
     })
   }
 }

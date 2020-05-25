@@ -12,8 +12,8 @@ export class ClienteService {
   constructor(private http: HttpClient) {
   }
 
-  getAll() {
-    return this.http.get(`${this.url}/todos`)
+  getAll(pagina: any) {
+    return this.http.get(`${this.url}/todos?page=${pagina}`)
       .pipe(resp => {
         return resp;
       });
